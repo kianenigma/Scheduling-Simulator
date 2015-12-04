@@ -392,14 +392,10 @@
 		renderProcess(conf) ; 
 	} ; 
 
-	var removeProcess = function (idx) {
-
-	}
-
 	var renderProcess = function ( conf ) {
 		$tbody.empty() ;
 		for ( var i = 0 ; i < conf.length ; i ++ ) {
-			var _tr = $("<tr> <td style='color : " + conf[i].color + "'>" + ("P"+i) + "</td> <td> " + conf[i].a + " </td> <td> " + conf[i].d + "</td></tr>")
+			var _tr = $("<tr> <td style='color : " + conf[i].color + "'>" + ("P"+i) + "</td> <td> " + conf[i].a + " </td> <td> " + conf[i].d + "</td> <td> <button class='removeProcess btn btn-danger btn-xs' onclick=removeProcess(" + i + ")> Remove </button></td> </tr>")
 			$tbody.append(_tr) ; 
 		} ; 
 		var _add = $("<tr> <td>P"+ conf.length +"</td> <td> <input id='new_a' class='form-control' min='0' type='number'/> </td> <td> <input id='new_d' class='form-control' type='number' min='1'/> </td> </tr>") ; 
@@ -407,6 +403,10 @@
 		$tbody.append(_add) ; 
 	}
 
+	var removeProcess = function (idx) {
+		conf.splice(idx , 1 ) ; 
+		renderProcess(conf) ; 
+	} ; 
 
 	var _timeLimit = 50 ;
 	var _topMargin = 100 ; 
@@ -416,14 +416,20 @@
 	var $tbody = $('#tbody') ;
 	var _simIdx = 0 ; 
 	var color = ["#e51c23" , "#9c27b0" , "#673ab7" , "#7c4dff" , "#3f51b5" , "#00bcd4" , "#259b24" , "#ff9800" , "#ff5722" , "#009688"] ;
-	$(document).ready(function(){
-		var conf = [
+	var conf = [
 		{ a : 5 , d : 3  , color : color[0] } , 
 		{ a : 1 , d : 1  , color : color[1] } , 
 		{ a : 2 , d : 5  , color : color[2] } 
-		] ; 
+	] ; 
+	$(document).ready(function(){
 
-		$("#addProc").click(function(){ addProcess( conf )}) ; 
+
+		
+
+		$("#addProc").click(function(){ addProcess( conf ) }) ; 
+		$("button.removeProcess").bind('click' , function () {
+			console.log($(this).attr('data-idx')) ; 
+		})
 		$("#start").click(function () {
 			$('div.time-block').remove() ;
 			initView();
