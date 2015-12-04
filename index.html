@@ -50,6 +50,7 @@
 					
 					<br>
 		  			<button class="btn btn-success" id="start" > Start Simulation </button>
+		  			<hr/> 
 		  			<p class="sum"> Average Waiting Time : <span id="awt"> </span></p>
 		  			<p class="sum"> Average Response Time : <span id="art"> </span></p>
 		  			<p class="sum"> Turnaround Time : <span id="tt"> </span></p>
@@ -301,11 +302,11 @@
 
 		for ( var i = 0 ; i < conf.length ; i++ ){
 			_avgWaitingTime += ( conf[i].f - conf[i].d - conf[i].a ) ;
-			__avgWaitingTime  += ( " ( " + String(conf[i].f) + "-" + String(conf[i].d) + "-" + String(conf[i].a) + " )" + ( i != conf.length-1 ? " + " : "") );  
+			__avgWaitingTime  += ( " <span style='color: " + conf[i].color + " '>( " + String(conf[i].f) + "-" + String(conf[i].d) + "-" + String(conf[i].a) + " ) </span>" + ( i != conf.length-1 ? " + " : "") );  
 			_avgrespTime += ( conf[i].fr - conf[i].a ) ; 
-			__avgrespTime += " ( " + String(conf[i].fr) + "-" + String(conf[i].a) + " )" + ( i != conf.length-1 ? " + " : "")    
+			__avgrespTime += " <span style='color: " + conf[i].color + " '>( " + String(conf[i].fr) + "-" + String(conf[i].a) + " ) </span>" + ( i != conf.length-1 ? " + " : "")    
 			_turnaroundTime += ( conf[i].f - conf[i].a ) ; 
-			__turnaroundTime += " ( " + String(conf[i].f) + "-" + conf[i].a + " ) "+ ( i != conf.length-1 ? " + " : "") ; 
+			__turnaroundTime += " <span style='color: " + conf[i].color + " '>( " + String(conf[i].f) + "-" + conf[i].a + " ) </span>"+ ( i != conf.length-1 ? " + " : "") ; 
 		} ; 
 
 		var _count = conf.length ;
@@ -368,9 +369,9 @@
 		var _summery = _sum(conf) ; 
 		console.log(_summery) ; 
 
-		$("#awt").text(_summery.avgWaitingTimeF + " = " + _summery.avgWaitingTime) ; 
-		$("#art").text(_summery.avgrespTimeF + " = " + _summery.avgrespTime) ; 
-		$("#tt").text(_summery.turnaroundTimeF + " = " + _summery.turnaroundTime) ; 
+		$("#awt").html(_summery.avgWaitingTimeF + " = " + _summery.avgWaitingTime) ; 
+		$("#art").html(_summery.avgrespTimeF + " = " + _summery.avgrespTime) ; 
+		$("#tt").html(_summery.turnaroundTimeF + " = " + _summery.turnaroundTime) ; 
 
 	}
 
@@ -421,10 +422,8 @@
 		{ a : 1 , d : 1  , color : color[1] } , 
 		{ a : 2 , d : 5  , color : color[2] } 
 	] ; 
+
 	$(document).ready(function(){
-
-
-		
 
 		$("#addProc").click(function(){ addProcess( conf ) }) ; 
 		$("button.removeProcess").bind('click' , function () {
@@ -471,7 +470,7 @@
 	div.table-wrapper {
 		padding: 5px ;
 		border-bottom: 1px solid #e2e2e2 ; 
-		height: 300px ; 
+		height: 350px ; 
 	}
 	div.table-wrapper div.container {
 		height: 100% ;
@@ -536,6 +535,9 @@
 
 	div.time-block.show {
 		width: 40px ; 
+	}
+	p.sum {
+		font-size: 10px ;
 	}
 </style>
 </body>
