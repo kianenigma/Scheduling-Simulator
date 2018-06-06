@@ -1,3 +1,5 @@
+![](https://raw.githubusercontent.com/Kianenigma/Scheduling-Simulator/master/Screen%20Shot%202018-06-06%20at%206.45.36%20PM.png)
+
 # Scheduling-Simulator
 An html based simulator showing LIFO - FIFO - SJF and RR Algorithms 
 
